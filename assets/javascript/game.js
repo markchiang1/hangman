@@ -43,6 +43,9 @@ document.onload = function(){
         }
         document.getElementById("computerWord").innerHTML = printString; //fix
     }
+    welcomeMessage();
+    computerWord();
+    printString();
 }  
 
 
@@ -52,6 +55,3 @@ document.onload = function(){
 
 
 // checkComputerWords();
-welcomeMessage();
-computerWord();
-printString();
