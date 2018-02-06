@@ -11,6 +11,7 @@ var validGuess=false;
 var uniqueCorrectGuess = true;
 var userLife=3;
 var numOfTries=8;
+var guessedWord =false;
 
 function welcomeMessage(){
     alert("Welcome to Animal Hangman!");
@@ -36,7 +37,7 @@ computerWord();
 
 function printString(){
     var printString = "";
-    var currentString = blankArr.toString();
+    var currentString = ""; //the .toString() return string of blankArr was not equal to computerRandWord; .toString() added commas between letters
     for (i=0; i<blankArr.length; i++){
         if(blankArr[i]===" "){
             printString +="&nbsp;&nbsp;";
@@ -45,13 +46,12 @@ function printString(){
             printString += blankArr[i];
             printString += " ";
         }    
+        currentString+=blankArr[i];
     } 
-    console.log(currentString);
     console.log(computerRandWord);
+    console.log(currentString);
     if(currentString===computerRandWord){
-            computerWord();
-            numOfTries=8;
-            gameStats();
+            guessedWord=true;
         }
     document.getElementById("computerWord").innerHTML = printString;
 }
@@ -65,7 +65,7 @@ function printWrongGuesses(){
 }
 function checkValidGuess(){
     if(userGuess.charCodeAt(0)<97 || userGuess.charCodeAt(0)>122){
-        alert("Please follow rules and enter a valid value!")
+        alert("Please follow rules and enter a valid value!");
         validGuess=false;
         numOfTries--;
     }
@@ -120,6 +120,14 @@ document.onkeyup = function(event){
             uniqueCorrectGuess=true;
             gameStats();
             printString(); 
+            if(guessedWord===true){
+                computerWord();
+                printString();
+                numOfTries=8;
+                gameStats();
+                wrongGuesses="";
+                guessedWord=false;
+            }
             printWrongGuesses();
             gameBegin=true;  
         }
@@ -131,6 +139,7 @@ document.onkeyup = function(event){
             printWrongGuesses();
             numOfTries=8;
             userLife--;
+            alert("You lost a life!");
             gameStats();
         }
         else if(userLife===0){
@@ -141,6 +150,7 @@ document.onkeyup = function(event){
             printWrongGuesses();
             numOfTries=0;
             gameStats(); 
+            alert("GAME OVER");
         }
     }
     else{
