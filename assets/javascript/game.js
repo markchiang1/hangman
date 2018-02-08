@@ -142,7 +142,7 @@ document.onkeyup = function(event){
             alert("You lost a life!");
             gameStats();
         }
-        else if(userLife===0){
+        if(userLife===0){
             document.getElementById("promptGame").innerHTML = "GAME OVER!!!";
             document.getElementById("computerWordPrompt").innerHTML = "";
             document.getElementById("computerWord").innerHTML ="";
